@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+numpy
+spectral
+scipy
+scikit-learn
+opencv-python-headless
+matplotlib

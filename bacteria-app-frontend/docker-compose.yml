@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # 1. Seu Frontend React
+  frontend:
+    build: .
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  # 2. Sua Aplicação Python (Onde ficam os scripts de HSI)
+  # Você precisará criar uma API simples (FastAPI) para encapsular seus scripts
+  backend:
+    image: python:3.10
+    # Supondo que você crie uma pasta 'backend' depois com seus scripts
+    volumes:
+      - ./backend:/app 
+    working_dir: /app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/bacteria_db
+    depends_on:
+      - db
+
+  # 3. Banco de Dados (Postgres)
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: bacteria_db
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
