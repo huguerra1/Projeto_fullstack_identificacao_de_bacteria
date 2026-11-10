@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Arquivos temporários de processamento e amostras HSI (não versionar dados de pesquisa)
+bacteria-app-backend/temp_files/
+*.raw
+*.hdr
+
+# Node
+node_modules/
+dist/
+
+# Sistema/IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
